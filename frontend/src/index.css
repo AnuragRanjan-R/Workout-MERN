@@ -1,0 +1,238 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+/* layout */
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+  --edit: #34a361;
+  --delete: #f44336;
+}
+body {
+  background: #f1f1f1;
+  margin: 0;
+  font-family: "Poppins";
+}
+header {
+  background: #fff;
+}
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header a {
+  color: #333;
+  text-decoration: none;
+}
+.pages {
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* homepage */
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+}
+
+/* Responsive grid layout */
+@media screen and (max-width: 1024px) {
+  .home {
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+.workout-details {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+.workout-details:hover {
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+.workout-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.workout-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.workout-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.workout-actions span {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  color: #fff;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.workout-actions span.edit {
+  background: var(--edit);
+}
+
+.workout-actions span.delete {
+  background: var(--delete);
+}
+
+.workout-actions span:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.workout-actions span.edit:hover {
+  background: #34a361;
+}
+
+.workout-actions span.delete:hover {
+  background: #d32f2f;
+}
+
+/* new workout form */
+label, input {
+  display: block;
+}
+input {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+form button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+form button:hover {
+  background: #159c7a;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
+}
+
+/* Update form specific styles */
+.update-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.update-form h3 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+/* Responsive typography */
+@media screen and (max-width: 480px) {
+  header .container h1 {
+    font-size: 1.5em;
+  }
+  .workout-details h4 {
+    font-size: 1.1em;
+  }
+  .workout-details p {
+    font-size: 0.85em;
+  }
+  form button {
+    font-size: 0.9em;
+  }
+}
+
+/* Responsive padding and margins */
+@media screen and (max-width: 480px) {
+  .pages {
+    padding: 10px;
+  }
+  .workout-details {
+    padding: 15px;
+    margin: 15px auto;
+  }
+  header .container {
+    padding: 10px;
+  }
+  .workout-actions {
+    top: 15px;
+    right: 15px;
+    gap: 8px;
+  }
+  .workout-actions span {
+    padding: 6px;
+    width: 28px;
+    height: 28px;
+  }
+}
