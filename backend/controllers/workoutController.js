@@ -3,25 +3,28 @@ const mongoose = require('mongoose');
 
 //get all workouts
 const getAllWorkouts = async (req, res) => {
-    const workouts = await Workout.find({}).sort({ createdAt: -1 });
+    const workouts = await Workout.find({ user_id: req.user._id }).sort({ createdAt: -1 });
     res.status(200).json(workouts);
 }
 
 //get a single workout
 const getWorkout = async (req, res) => {
     const { id } = req.params;
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such workout' });
     }
-    //check if workout exists
-    const workout = await Workout.findById(id);
+
+    const workout = await Workout.findOne({ _id: id, user_id: req.user._id });
+
     if (!workout) {
         return res.status(404).json({ error: 'No such workout' });
     }
+
     res.status(200).json(workout);
 }
 
-// create a new workout
+//create a new workout
 const createWorkout = async (req, res) => {
     const { title, load, reps } = req.body;
 
@@ -41,7 +44,7 @@ const createWorkout = async (req, res) => {
 
     //add doc to db
     try {
-        const workout = await Workout.create({ title, load, reps });
+        const workout = await Workout.create({ title, load, reps, user_id: req.user._id });
         res.status(200).json(workout);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -54,11 +57,13 @@ const deleteWorkout = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such workout' });
     }
-    //check if workout exists
-    const workout = await Workout.findByIdAndDelete({_id: id});
+
+    const workout = await Workout.findOneAndDelete({ _id: id, user_id: req.user._id });
+
     if (!workout) {
         return res.status(404).json({ error: 'No such workout' });
     }
+
     res.status(200).json(workout);
 }
 
@@ -86,9 +91,8 @@ const updateWorkout = async (req, res) => {
     }
 
     try {
-        // Update the workout and return the updated document
-        const workout = await Workout.findByIdAndUpdate(
-            { _id: id },
+        const workout = await Workout.findOneAndUpdate(
+            { _id: id, user_id: req.user._id },
             { ...req.body },
             { new: true, runValidators: true }
         );

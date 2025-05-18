@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useAuthContext } from '../hooks/useAuthContext';
 import { toast } from 'react-toastify';
 
 const UpdateWorkoutForm = ({ workout, onClose }) => {
     const { dispatch } = useWorkoutsContext();
+    const { user } = useAuthContext();
     const [title, setTitle] = useState(workout.title);
     const [load, setLoad] = useState(workout.load);
     const [reps, setReps] = useState(workout.reps);
@@ -16,6 +18,11 @@ const UpdateWorkoutForm = ({ workout, onClose }) => {
         setIsLoading(true);
         setError(null);
         
+        if (!user) {
+            toast.error('You must be logged in to update a workout');
+            return;
+        }
+        
         const updatedWorkout = { title, load, reps };
         
         try {
@@ -23,7 +30,8 @@ const UpdateWorkoutForm = ({ workout, onClose }) => {
                 method: 'PATCH',
                 body: JSON.stringify(updatedWorkout),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 }
             });
             

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
 import { toast } from 'react-toastify';
 
@@ -8,6 +9,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const WorkoutDetails = ({ workout }) => {
     const { dispatch } = useWorkoutsContext();
+    const { user } = useAuthContext();
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [currentWorkout, setCurrentWorkout] = useState(workout);
 
@@ -16,8 +18,16 @@ const WorkoutDetails = ({ workout }) => {
     }, [workout]);
 
     const handleClick = async () => {
+        if (!user) {
+            toast.error('You must be logged in to delete a workout');
+            return;
+        }
+
         const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:4000'}/api/workouts/` + workout._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
         });
         const json = await response.json();
         if (response.ok) {
