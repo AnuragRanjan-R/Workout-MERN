@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { toast } from 'react-toastify';
 
 const UpdateWorkoutForm = ({ workout, onClose }) => {
     const { dispatch } = useWorkoutsContext();
@@ -18,7 +19,7 @@ const UpdateWorkoutForm = ({ workout, onClose }) => {
         const updatedWorkout = { title, load, reps };
         
         try {
-            const response = await fetch('/api/workouts/' + workout._id, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:4000'}/api/workouts/` + workout._id, {
                 method: 'PATCH',
                 body: JSON.stringify(updatedWorkout),
                 headers: {
@@ -31,6 +32,7 @@ const UpdateWorkoutForm = ({ workout, onClose }) => {
             if (!response.ok) {
                 setError(json.error);
                 setEmptyFields(json.emptyFields || []);
+                toast.error(json.error || 'Failed to update workout');
             }
             
             if (response.ok) {
@@ -45,10 +47,12 @@ const UpdateWorkoutForm = ({ workout, onClose }) => {
                     reps
                 };
                 dispatch({ type: 'UPDATE_WORKOUT', payload: updatedWorkoutData });
+                toast.success('Workout updated successfully!');
                 onClose();
             }
         } catch (error) {
             setError('An error occurred while updating the workout');
+            toast.error('An error occurred while updating the workout');
         } finally {
             setIsLoading(false);
         }

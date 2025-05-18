@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { toast } from 'react-toastify';
 
 const WorkoutForm = () => {
     const { dispatch } = useWorkoutsContext();
@@ -24,6 +25,7 @@ const WorkoutForm = () => {
         if (!response.ok) {
             setError(json.error);
             setEmptyFields(json.emptyFields);
+            toast.error(json.error);
         } if (response.ok) {
             setTitle('');
             setLoad('');    
@@ -32,6 +34,7 @@ const WorkoutForm = () => {
             setEmptyFields([]);
             console.log('New workout added:', json);
             dispatch({ type: 'CREATE_WORKOUT', payload: json });
+            toast.success('New workout added successfully!');
         }
     }
 

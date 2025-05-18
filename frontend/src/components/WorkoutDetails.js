@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
+import { toast } from 'react-toastify';
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
@@ -15,12 +16,15 @@ const WorkoutDetails = ({ workout }) => {
     }, [workout]);
 
     const handleClick = async () => {
-        const response = await fetch('/api/workouts/' + workout._id, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:4000'}/api/workouts/` + workout._id, {
             method: 'DELETE'
         });
         const json = await response.json();
         if (response.ok) {
             dispatch({ type: 'DELETE_WORKOUT', payload: json });
+            toast.success('Workout deleted successfully!');
+        } else {
+            toast.error(json.error || 'Failed to delete workout');
         }
     }
 
