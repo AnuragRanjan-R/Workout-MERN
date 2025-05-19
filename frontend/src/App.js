@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import VerifyOTP from './pages/VerifyOTP';
 import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" element={<Home/>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/signup" element={<Signup/>}/>
+              <Route path="/verify-otp" element={<VerifyOTP/>}/>
             </Routes>
           </div>
           <ToastContainer position="top-right" autoClose={3000} />

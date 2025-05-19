@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Signup = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -20,7 +21,7 @@ const Signup = () => {
             const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:4000'}/api/user/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ name, email, password })
             });
 
             const json = await response.json();
@@ -37,8 +38,8 @@ const Signup = () => {
                 // update the auth context
                 dispatch({ type: 'LOGIN', payload: json });
 
-                toast.success('Account created successfully!');
-                navigate('/');
+                toast.success('Account created successfully! Please check your email for OTP.');
+                navigate('/verify-otp', { state: { email } });
             }
         } catch (error) {
             setError('An error occurred during signup');
@@ -52,12 +53,22 @@ const Signup = () => {
         <form className="signup" onSubmit={handleSubmit}>
             <h3>Sign Up</h3>
 
+            <label>Name:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                disabled={isLoading}
+                required
+            />
+
             <label>Email:</label>
             <input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 disabled={isLoading}
+                required
             />
 
             <label>Password:</label>
@@ -66,6 +77,7 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 disabled={isLoading}
+                required
             />
 
             <button disabled={isLoading}>

@@ -3,6 +3,7 @@ import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
 import { toast } from 'react-toastify';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
@@ -47,8 +48,12 @@ const WorkoutDetails = ({ workout }) => {
                     <p><strong>Reps: </strong>{currentWorkout.reps}</p>
                     <p>{formatDistanceToNow(new Date(currentWorkout.createdAt), {addSuffix: true})}</p>
                     <div className="workout-actions">
-                        <span className="material-symbols-outlined edit" onClick={() => setShowUpdateForm(true)}>.</span>
-                        <span className="material-symbols-outlined delete" onClick={handleClick}>delete</span>
+                        <span className="edit" onClick={() => setShowUpdateForm(true)}>
+                            <FaEdit />
+                        </span>
+                        <span className="delete" onClick={handleClick}>
+                            <FaTrash />
+                        </span>
                     </div>
                 </>
             ) : (

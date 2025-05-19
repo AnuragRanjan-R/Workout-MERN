@@ -318,3 +318,38 @@ input.error {
     height: 28px;
   }
 }
+
+/* OTP verification page */
+.verify-otp {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+.verify-otp h3 {
+    margin: 0 0 20px 0;
+    color: var(--primary);
+}
+
+.verify-otp p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.verify-otp input {
+    letter-spacing: 8px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.verify-otp .resend-button {
+    background: #666;
+    margin-top: 10px;
+}
+
+.verify-otp .resend-button:hover {
+    background: #555;
+}
