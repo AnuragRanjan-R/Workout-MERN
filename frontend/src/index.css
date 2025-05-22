@@ -9,7 +9,8 @@
   --delete: #f44336;
 }
 body {
-  background: #f1f1f1;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./images/work3.jpg') no-repeat center center fixed;
+  background-size: cover;
   margin: 0;
   font-family: "Poppins";
 }
@@ -34,6 +35,8 @@ header a {
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+  background: none;
+  min-height: 100vh;
 }
 
 /* auth forms */
