@@ -49,30 +49,35 @@ const Login = () => {
     };
 
     return (
-        <form className="login" onSubmit={handleSubmit}>
-            <h3>Log In</h3>
+        <>
+            <form className="login" onSubmit={handleSubmit}>
+                <h3>Log In</h3>
 
-            <label>Email:</label>
-            <input
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                disabled={isLoading}
-            />
+                <label>Email:</label>
+                <input
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    disabled={isLoading}
+                />
 
-            <label>Password:</label>
-            <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                disabled={isLoading}
-            />
+                <label>Password:</label>
+                <input
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    disabled={isLoading}
+                />
 
-            <button disabled={isLoading}>
-                {isLoading ? 'Logging in...' : 'Log In'}
-            </button>
-            {error && <div className="error">{error}</div>}
-        </form>
+                <button disabled={isLoading}>
+                    {isLoading ? 'Logging in...' : 'Log In'}
+                </button>
+                {error && <div className="error">{error}</div>}
+            </form>
+            <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                <span style={{ color: 'white' }}>Don't have an account? <a href="/signup" style={{ color: 'var(--primary)', textDecoration: 'underline', cursor: 'pointer' }}>Sign up</a></span>
+            </div>
+        </>
     );
 };
 

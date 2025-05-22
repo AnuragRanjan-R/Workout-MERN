@@ -50,41 +50,46 @@ const Signup = () => {
     };
 
     return (
-        <form className="signup" onSubmit={handleSubmit}>
-            <h3>Sign Up</h3>
+        <>
+            <form className="signup" onSubmit={handleSubmit}>
+                <h3>Sign Up</h3>
 
-            <label>Name:</label>
-            <input
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                disabled={isLoading}
-                required
-            />
+                <label>Name:</label>
+                <input
+                    type="text"
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    disabled={isLoading}
+                    required
+                />
 
-            <label>Email:</label>
-            <input
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                disabled={isLoading}
-                required
-            />
+                <label>Email:</label>
+                <input
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    disabled={isLoading}
+                    required
+                />
 
-            <label>Password:</label>
-            <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                disabled={isLoading}
-                required
-            />
+                <label>Password:</label>
+                <input
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    disabled={isLoading}
+                    required
+                />
 
-            <button disabled={isLoading}>
-                {isLoading ? 'Signing up...' : 'Sign Up'}
-            </button>
-            {error && <div className="error">{error}</div>}
-        </form>
+                <button disabled={isLoading}>
+                    {isLoading ? 'Signing up...' : 'Sign Up'}
+                </button>
+                {error && <div className="error">{error}</div>}
+            </form>
+            <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                <span style={{ color: 'white' }}>Already have an account? <a href="/login" style={{ color: 'var(--primary)', textDecoration: 'underline', cursor: 'pointer' }}>Log in</a></span>
+            </div>
+        </>
     );
 };
 

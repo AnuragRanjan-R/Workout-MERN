@@ -49,7 +49,7 @@ const WorkoutForm = () => {
 
 
     return (
-        <form className="create" onSubmit={handleSubmit}>
+        <form className="create" onSubmit={handleSubmit} style={{ color: 'white' }}>
             <h3> Add a new Workout</h3>
 
             <label>Exercise Title:</label>
